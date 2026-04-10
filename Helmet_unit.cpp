@@ -1,28 +1,27 @@
-// Helmet Unit Code
+#include <iostream>
+using namespace std;
 
-const int FSR_PIN = A0;
-const int MQ3_PIN = A1;
-const int REED_PIN = 2;
+int main() {
+    int fsrValue, alcoholValue, strapStatus;
 
-void setup() {
-  Serial.begin(9600);
-  pinMode(REED_PIN, INPUT_PULLUP);
-}
+    // Simulated sensor input
+    cout << "Enter FSR value (Helmet worn?): ";
+    cin >> fsrValue;
 
-void loop() {
-  int fsr = analogRead(FSR_PIN);
-  int alcohol = analogRead(MQ3_PIN);
-  int strap = digitalRead(REED_PIN);
+    cout << "Enter Alcohol value: ";
+    cin >> alcoholValue;
 
-  int helmet = (fsr > 300) ? 1 : 0;
-  int strapStatus = (strap == LOW) ? 1 : 0;
-  int alcoholStatus = (alcohol > 400) ? 1 : 0;
+    cout << "Enter Strap status (1 = fastened, 0 = not): ";
+    cin >> strapStatus;
 
-  Serial.print(helmet);
-  Serial.print(",");
-  Serial.print(strapStatus);
-  Serial.print(",");
-  Serial.println(alcoholStatus);
+    // Conditions
+    int helmet = (fsrValue > 300) ? 1 : 0;
+    int strap = (strapStatus == 1) ? 1 : 0;
+    int alcohol = (alcoholValue > 400) ? 1 : 0;
 
-  delay(500);
+    // Transmitting data (simulated)
+    cout << "\nTransmitted Data: ";
+    cout << helmet << "," << strap << "," << alcohol << endl;
+
+    return 0;
 }
