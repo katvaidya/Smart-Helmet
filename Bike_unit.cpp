@@ -2,18 +2,34 @@
 using namespace std;
 
 int main() {
-    int helmet, strap, alcohol;
+    int fsrValue;
+    int strapStatus;
 
-    // Receiving data (simulated)
-    cout << "Enter received data (helmet strap alcohol): ";
-    cin >> helmet >> strap >> alcohol;
+    int fsrThreshold = 300;
 
-    // Logic
-    if (helmet == 1 && strap == 1 && alcohol == 0) {
-        cout << "Bike Started ✅" << endl;
-    } else {
-        cout << "Bike NOT Started ❌" << endl;
-        cout << "Buzzer ON 🔊" << endl;
+    cout << "SMART HELMET SYSTEM (Simulation)\n";
+
+    while (true) {
+
+        // Simulated sensor inputs
+        cout << "\nEnter FSR value: ";
+        cin >> fsrValue;
+
+        cout << "Enter Strap Status (1 = Fastened, 0 = Not): ";
+        cin >> strapStatus;
+
+        cout << "\nFSR: " << fsrValue 
+             << " | Strap: " << strapStatus << endl;
+
+        // Condition check
+        if (fsrValue > fsrThreshold && strapStatus == 1) {
+            cout << "Bluetooth: SAFE" << endl;
+            cout << "STATUS: SAFE" << endl;
+        } 
+        else {
+            cout << "Bluetooth: UNSAFE" << endl;
+            cout << "STATUS: UNSAFE" << endl;
+        }
     }
 
     return 0;

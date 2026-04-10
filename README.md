@@ -1,48 +1,55 @@
-# Smart Helmet System 🪖
+# Smart Helmet System 
 
-An IoT-based safety system that ensures helmet usage, strap fastening, and alcohol detection before allowing bike ignition.
+An IoT-based Smart Helmet system designed to enhance rider safety by ensuring that the bike starts only when proper safety conditions are met.
 
 ---
 
 ## Features
-- Helmet detection using FSR sensor
-- Strap verification using reed switch
-- Alcohol detection using MQ-3 sensor
-- Bike ignition control using relay
-- Buzzer alert system
-- Bluetooth communication using HC-05
+
+- Detects if the helmet is worn using FSR sensor
+- Verifies chin strap using magnetic reed switch
+- Sends real-time data using Bluetooth (HC-05)
+- Controls bike ignition using relay module
+- Activates buzzer alert for unsafe conditions
+- Prevents bike start if safety conditions are not satisfied
 
 ---
 
-## Working
+## Working Principle
 
-The helmet unit checks:
-- Helmet is worn
-- Strap is fastened
-- Alcohol is detected or not
+The system consists of two units:
 
-This data is sent to the bike unit using Bluetooth.
-
-The bike starts only if:
-Helmet = YES  
-Strap = YES  
-Alcohol = NO  
+### Helmet Unit (Transmitter)
+- Reads data from:
+  - FSR sensor (helmet detection)
+  - Reed switch (strap verification)
+- Sends status via Bluetooth:
+  - `"SAFE"` → Helmet worn & strap fastened
+  - `"UNSAFE"` → Any condition fails
 
 ---
 
-## Project Structure
+### Bike Unit (Receiver)
+- Receives data from helmet unit via Bluetooth
+- Performs action based on received message:
 
-Smart-Helmet/
-│
-├── Helmet_unit/
-│   └── Helmet_unit.ino
-│
-├── Bike_unit/
-│   └── Bike_unit.ino
-│
-├── README.md
+| Condition | Action |
+|----------|--------|
+| SAFE     | Relay ON (Bike starts), Buzzer OFF |
+| UNSAFE   | Relay OFF (Bike stops), Buzzer ON |
 
 ---
 
-## Author
-Kasturi Vaidya
+## Components Used
+
+- Arduino Uno (2 units)
+- FSR Sensor (Force Sensitive Resistor)
+- Magnetic Reed Switch
+- HC-05 Bluetooth Module
+- Relay Module
+- Buzzer
+- Connecting Wires
+- Power Supply
+
+---
+

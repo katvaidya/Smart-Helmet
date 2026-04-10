@@ -1,27 +1,42 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 int main() {
-    int fsrValue, alcoholValue, strapStatus;
+    int fsrValue;
+    int strapStatus;
 
-    // Simulated sensor input
-    cout << "Enter FSR value (Helmet worn?): ";
-    cin >> fsrValue;
+    int fsrThreshold = 300;
 
-    cout << "Enter Alcohol value: ";
-    cin >> alcoholValue;
+    cout << "SMART HELMET SYSTEM (Simulation)\n";
 
-    cout << "Enter Strap status (1 = fastened, 0 = not): ";
-    cin >> strapStatus;
+    while (true) {
 
-    // Conditions
-    int helmet = (fsrValue > 300) ? 1 : 0;
-    int strap = (strapStatus == 1) ? 1 : 0;
-    int alcohol = (alcoholValue > 400) ? 1 : 0;
+        // Simulated inputs
+        cout << "\nEnter FSR value: ";
+        cin >> fsrValue;
 
-    // Transmitting data (simulated)
-    cout << "\nTransmitted Data: ";
-    cout << helmet << "," << strap << "," << alcohol << endl;
+        cout << "Enter Strap Status (1 = Fastened, 0 = Not): ";
+        cin >> strapStatus;
+
+        cout << "\nFSR: " << fsrValue << " | Strap: " << strapStatus << endl;
+
+        // ✅ SAFE CONDITION
+        if (fsrValue > fsrThreshold && strapStatus == 1) {
+
+            cout << "Relay: ON (Ignition Allowed)" << endl;
+            cout << "Buzzer: OFF" << endl;
+            cout << "Bluetooth: SAFE" << endl;
+        }
+
+        // ❌ UNSAFE CONDITION
+        else {
+
+            cout << "Relay: OFF (Ignition Blocked)" << endl;
+            cout << "Buzzer: ON (Alert)" << endl;
+            cout << "Bluetooth: UNSAFE" << endl;
+        }
+    }
 
     return 0;
 }
